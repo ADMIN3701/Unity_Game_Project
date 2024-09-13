@@ -16,16 +16,13 @@ public class Hitted_bu_hero : MonoBehaviour
 
     private void Update()
     {
-        if (fight == true)
+        if (fight == true && Input.GetKeyDown(KeyCode.E))
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                Debug.Log("Was hitted!");
-                animator.SetBool("Fight", true);
-            }
-            else
-                animator.SetBool("Fight", false);
+            Debug.Log("Was hitted!");
+            animator.SetBool("Fight", true);
         }
+        else
+            animator.SetBool("Fight", false);
     }
 
     void OnTriggerEnter(Collider myTrigger)
@@ -34,6 +31,14 @@ public class Hitted_bu_hero : MonoBehaviour
         {
             Debug.Log("Was through!");
             fight = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name == "Hero")
+        {
+            fight = false;
         }
     }
 }
